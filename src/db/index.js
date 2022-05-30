@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { mongoose } = require("mongoose");
-const debug = require("debug")("social-api:db:root");
+const debug = require("debug")("tootattoo:db:root");
 const chalk = require("chalk");
 
 const connectDB = async (connectionsString) =>
