@@ -1,7 +1,7 @@
 require("dotenv").config();
-const debug = require("debug")("gamersland:server:initializeServer");
+const debug = require("debug")("tootattoo:server:initializeServer");
 const chalk = require("chalk");
-const app = require(".");
+const app = require("./index");
 
 const initializeServer = (port) =>
   new Promise((resolve, reject) => {
