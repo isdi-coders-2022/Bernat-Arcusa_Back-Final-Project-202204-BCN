@@ -4,7 +4,7 @@ const { userLogin } = require("./usersControllers");
 
 const mockToken = { token: "a1b2c3d4" };
 jest.mock("../../../db/models/User", () => ({
-  findOne: jest.fn().mockReturnValueOnce(true).mockReturnValueOnce(true),
+  findOne: jest.fn().mockReturnValueOnce(true),
 }));
 
 jest.mock("bcrypt", () => ({
