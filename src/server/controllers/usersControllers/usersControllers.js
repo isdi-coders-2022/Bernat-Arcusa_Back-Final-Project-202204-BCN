@@ -28,10 +28,7 @@ const userLogin = async (req, res, next) => {
     error.customMessage = "Username or password are wrong";
     next(error);
   } else {
-    const token = jsonwebtoken.sign(
-      userData,
-      "$2a$10$Coq.vzDvt.0IWH6qBGb6FOH69BGZuS/jlLU9Zsrh2iOcVk52j9Eay"
-    );
+    const token = jsonwebtoken.sign(userData, process.env.JWT_SECRET);
     res.status(200).json(token);
   }
 };
