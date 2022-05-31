@@ -3,7 +3,7 @@ const debug = require("debug")("tootattoo:server:users");
 const chalk = require("chalk");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
-const User = require("../../../db/model/User");
+const User = require("../../../db/models/User");
 
 const userLogin = async (req, res, next) => {
   const { username, password } = req.body;
