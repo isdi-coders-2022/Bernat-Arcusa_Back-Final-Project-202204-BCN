@@ -5,6 +5,7 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 const connectDB = require("../../../db/index");
 const User = require("../../../db/models/User");
 const app = require("../..");
+const { mockUser } = require("../../controllers/usersControllers/mocks/mocks");
 
 let mongoServer;
 const users = [
@@ -50,6 +51,19 @@ describe("Given a POST '/users/login' endpoint", () => {
       expect(response.headers["content-type"]).toEqual(
         expect.stringContaining("json")
       );
+    });
+  });
+});
+
+describe("Given a POST '/users/register' endpoint", () => {
+  describe("When it receives a request", () => {
+    test("Then it should the created user object", async () => {
+      const { body } = await request(app)
+        .post("/users/register")
+        .send(mockUser)
+        .expect(201);
+
+      expect(body.user).toBe(mockUser.username);
     });
   });
 });
