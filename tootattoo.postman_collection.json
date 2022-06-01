@@ -1,0 +1,32 @@
+{
+  "info": {
+    "_postman_id": "6c1718d0-d69d-43e9-97ee-5a02925b7ff6",
+    "name": "tootattoo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20626845"
+  },
+  "item": [
+    {
+      "name": "user/login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"natbernat\",\r\n    \"password\":\"natbernat\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}users/login",
+          "host": ["{{origin}}users"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

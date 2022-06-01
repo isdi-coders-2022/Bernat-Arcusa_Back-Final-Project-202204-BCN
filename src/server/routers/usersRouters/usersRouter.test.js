@@ -35,7 +35,7 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-describe("Given a POST '/login' endpoint", () => {
+describe("Given a POST '/users/login' endpoint", () => {
   describe("When it receives a request", () => {
     const receivedRequest = {
       username: "mibaku",
