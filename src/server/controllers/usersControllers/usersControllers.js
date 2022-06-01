@@ -33,23 +33,32 @@ const userLogin = async (req, res, next) => {
   }
 };
 
-const userRegister = async (req, res) => {
+const userRegister = async (req, res, next) => {
   const { username, password, fullname, email } = req.body;
 
-  const user = await User.findOne({ username });
-  if (!user) {
-    const encryptedPassword = await bcrypt.hash(password, 10);
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      const encryptedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = {
-      username,
-      fullname,
-      email,
-      password: encryptedPassword,
-    };
+      const newUser = {
+        username,
+        fullname,
+        email,
+        password: encryptedPassword,
+      };
 
-    await User.create(newUser);
+      await User.create(newUser);
 
-    res.status(201).json({ newUser: username });
+      res.status(201).json({ newUser: username });
+    } else {
+      const userError = new Error();
+      userError.customMessage = "Username already exists";
+      userError.statusCode = 409;
+      next(userError);
+    }
+  } catch (error) {
+    next(error);
   }
 };
 
