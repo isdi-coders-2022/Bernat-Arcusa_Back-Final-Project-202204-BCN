@@ -33,4 +33,24 @@ const userLogin = async (req, res, next) => {
   }
 };
 
-module.exports = { userLogin };
+const userRegister = async (req, res) => {
+  const { username, password, fullname, email } = req.body;
+
+  const user = await User.findOne({ username });
+  if (!user) {
+    const encryptedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = {
+      username,
+      fullname,
+      email,
+      password: encryptedPassword,
+    };
+
+    await User.create(newUser);
+
+    res.status(201).json({ newUser: username });
+  }
+};
+
+module.exports = { userLogin, userRegister };
