@@ -44,7 +44,7 @@
       "!src/index.js",
       "!src/server/initializeServer.js",
       "!src/server/index.js",
-      "!src/database/index.js",
+      "!src/db/index.js",
       "!src/**/*.test.js",
       "src/**/*.snap",
       "src/mocks/*.js",

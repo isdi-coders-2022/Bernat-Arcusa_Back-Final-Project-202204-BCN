@@ -5,26 +5,21 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 const connectDB = require("../../../db/index");
 const User = require("../../../db/models/User");
 const app = require("../..");
-const { mockUser } = require("../../controllers/usersControllers/mocks/mocks");
+const {
+  mockUser,
+  mockUsers,
+} = require("../../controllers/usersControllers/mocks/mocks");
 
 let mongoServer;
-const users = [
-  {
-    username: "mibaku",
-    fullname: "Mijaíl Bakunin",
-    email: "mbakunin@mongoose.isObjectIdOrHexString.com",
-    password: "$2a$10$L.RdFNSaIjokMJlh68ouoeyvnoBYk2cyLk2Nt0ZdlD.FFA2oznHCu",
-  },
-];
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
-
   await connectDB(mongoServer.getUri());
 });
 
 beforeEach(async () => {
-  await User.create(users[0]);
+  await User.create(mockUsers[0]);
+  await User.create(mockUsers[1]);
 });
 
 afterEach(async () => {
@@ -57,7 +52,7 @@ describe("Given a POST '/users/login' endpoint", () => {
 
 describe("Given a POST '/users/register' endpoint", () => {
   describe("When it receives a request", () => {
-    test("Then it should the created user object", async () => {
+    test("Then it should return the created username", async () => {
       const { body } = await request(app)
         .post("/users/register")
         .send(mockUser)

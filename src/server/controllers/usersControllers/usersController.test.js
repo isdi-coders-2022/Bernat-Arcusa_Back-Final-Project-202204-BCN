@@ -63,7 +63,7 @@ describe("Given the userLogin controller", () => {
 describe("Given the userRegister controller", () => {
   const req = { body: mockUser };
   describe("When invoked with a request object with all required properties", () => {
-    test("Then a response with a status 201 and a body containing the username will be recieved", async () => {
+    test("Then a response with a status 201 and a body containing the username will be received", async () => {
       const expectedStatus = 201;
       const expectedJson = { user: mockUser.username };
 
