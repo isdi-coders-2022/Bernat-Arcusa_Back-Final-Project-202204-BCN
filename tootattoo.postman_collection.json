@@ -1,89 +1,77 @@
 {
-	"info": {
-		"_postman_id": "6c1718d0-d69d-43e9-97ee-5a02925b7ff6",
-		"name": "tootattoo",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20626845"
-	},
-	"item": [
-		{
-			"name": "user/login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"natbernat\",\r\n    \"password\":\"natbernat\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{origin}}users/login",
-					"host": [
-						"{{origin}}users"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user/register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"mariogl\",\r\n    \"password\":\"1234\",\r\n    \"fullname\":\"Mario González\",\r\n    \"email\":\"mariogl@isdi.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{origin}}users/register",
-					"host": [
-						"{{origin}}users"
-					],
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "origin",
-			"value": "https://bernat-arcusa-back-final-project-202204.onrender.com/",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "6c1718d0-d69d-43e9-97ee-5a02925b7ff6",
+    "name": "tootattoo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20626845"
+  },
+  "item": [
+    {
+      "name": "user/login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"natbernat\",\r\n    \"password\":\"natbernat\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}users/login",
+          "host": ["{{origin}}users"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "user/register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"mariogl\",\r\n    \"password\":\"1234\",\r\n    \"fullname\":\"Mario González\",\r\n    \"email\":\"mariogl@isdi.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}users/register",
+          "host": ["{{origin}}users"],
+          "path": ["register"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "origin",
+      "value": "https://bernat-arcusa-back-final-project-202204.onrender.com/",
+      "type": "string"
+    }
+  ]
 }
