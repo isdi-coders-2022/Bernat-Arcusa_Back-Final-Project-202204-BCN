@@ -27,6 +27,51 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "user/register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"mariogl\",\r\n    \"password\":\"1234\",\r\n    \"fullname\":\"Mario González\",\r\n    \"email\":\"mariogl@isdi.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}users/register",
+          "host": ["{{origin}}users"],
+          "path": ["register"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "origin",
+      "value": "https://bernat-arcusa-back-final-project-202204.onrender.com/",
+      "type": "string"
     }
   ]
 }
