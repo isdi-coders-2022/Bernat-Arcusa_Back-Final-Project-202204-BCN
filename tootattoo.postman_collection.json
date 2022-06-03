@@ -49,6 +49,31 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "tattoos/list",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"mariogl\",\r\n    \"password\":\"1234\",\r\n    \"fullname\":\"Mario González\",\r\n    \"email\":\"mariogl@isdi.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}tattoos/list",
+          "host": ["{{origin}}tattoos"],
+          "path": ["list"]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
