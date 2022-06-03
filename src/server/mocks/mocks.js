@@ -15,6 +15,10 @@ const mockTattoos = [
   },
 ];
 
+const mockTattoosEmpty = [];
+
+const mockToken = { token: "a1b2c3d4" };
+
 const mockUser = {
   username: "louis",
   password: "1234",
@@ -37,6 +41,10 @@ const mockUsers = [
   },
 ];
 
-const mockToken = { token: "a1b2c3d4" };
-
-module.exports = { mockTattoos, mockUser, mockUsers, mockToken };
+module.exports = {
+  mockTattoos,
+  mockTattoosEmpty,
+  mockToken,
+  mockUser,
+  mockUsers,
+};
