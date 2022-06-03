@@ -4,7 +4,7 @@ const credentialsRegisterSchema = {
   body: Joi.object({
     username: Joi.string()
       .max(20)
-      .messages({ message: "Username is Required" })
+      .messages({ message: "Username is required" })
       .required(),
     password: Joi.string()
       .max(20)

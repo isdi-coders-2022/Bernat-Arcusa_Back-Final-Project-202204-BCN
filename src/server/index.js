@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const usersRouter = require("./routers/usersRouters/usersRouters");
 const { generalError, notFoundError } = require("./middlewares/errors/errors");
+const tattoosRouter = require("./routers/tattoosRouters/tattoosRouters");
 
 const app = express();
 
@@ -13,6 +14,8 @@ app.use(express.json());
 app.use(helmet());
 
 app.use("/users", usersRouter);
+
+app.use("/tattoos", tattoosRouter);
 
 app.use(notFoundError);
 app.use(generalError);
