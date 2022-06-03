@@ -1,6 +1,7 @@
 const mockTattoos = [
   {
     id: "1a1b1c",
+    title: "Arm abstract fluid forms",
     image: "image url",
     creator: "6295aacd280fd64f7583019f",
     creationDate: "2022-06-02",
@@ -8,6 +9,7 @@ const mockTattoos = [
   },
   {
     id: "2a2b2c",
+    title: "Colored realistic flowers",
     image: "image url",
     creator: "6295aacd280fd64f7583019f",
     creationDate: "2022-06-02",

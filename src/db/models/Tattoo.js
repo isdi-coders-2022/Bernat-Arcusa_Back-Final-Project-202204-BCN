@@ -1,12 +1,22 @@
 const { Schema, model, SchemaTypes } = require("mongoose");
 
 const TattooSchema = new Schema({
-  image: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
   creator: {
     type: SchemaTypes.ObjectId,
     ref: "User",
   },
-  creationDate: String,
+  creationDate: {
+    type: String,
+    required: true,
+  },
   tags: [String],
 });
 
