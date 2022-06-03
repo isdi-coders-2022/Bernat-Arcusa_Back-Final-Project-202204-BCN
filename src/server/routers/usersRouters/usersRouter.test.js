@@ -5,10 +5,7 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 const connectDB = require("../../../db/index");
 const User = require("../../../db/models/User");
 const app = require("../..");
-const {
-  mockUser,
-  mockUsers,
-} = require("../../controllers/usersControllers/mocks/mocks");
+const { mockUsers, mockUser } = require("../../mocks/mocks");
 
 let mongoServer;
 
