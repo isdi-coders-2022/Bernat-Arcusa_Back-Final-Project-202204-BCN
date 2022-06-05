@@ -14,4 +14,22 @@ const getTattoos = async (req, res, next) => {
   }
 };
 
-module.exports = { getTattoos };
+const deleteTattoo = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const deletedTattoo = await Tattoo.findByIdAndDelete(id);
+    if (deletedTattoo) {
+      res.status(202).json({ message: `Tattoo has been deleted` });
+    } else {
+      const error = new Error("Any tattoo to delete has found");
+      error.statusCode = 404;
+      error.customMessage = "Any tattoo to delete has found";
+      next(error);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getTattoos, deleteTattoo };
