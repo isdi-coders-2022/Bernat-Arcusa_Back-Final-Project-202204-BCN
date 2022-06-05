@@ -20,7 +20,7 @@ const deleteTattoo = async (req, res, next) => {
     const deletedTattoo = await Tattoo.findByIdAndDelete(id);
 
     if (deletedTattoo) {
-      res.status(202).json({ message: "Tattoo has been deleted" });
+      res.status(200).json({ message: "Tattoo has been deleted" });
     } else {
       const error = new Error("Any tattoo to delete has found");
       error.statusCode = 404;
