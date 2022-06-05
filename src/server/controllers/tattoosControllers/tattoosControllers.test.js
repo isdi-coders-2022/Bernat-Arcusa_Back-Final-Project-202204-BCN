@@ -34,9 +34,9 @@ describe("Given the getTattoos controller", () => {
 
 describe("Given the deleteTattoo controller", () => {
   describe("When invoked with a request containing a tattoo", () => {
-    test("Then a response with status 202 and message 'Tattoo has been deleted'", async () => {
+    test("Then a response with status 200 and message 'Tattoo has been deleted'", async () => {
       Tattoo.findByIdAndDelete = jest.fn().mockResolvedValue(true);
-      const expectedStatus = 202;
+      const expectedStatus = 200;
       const expectedJson = { message: "Tattoo has been deleted" };
       const req = {
         params: {
