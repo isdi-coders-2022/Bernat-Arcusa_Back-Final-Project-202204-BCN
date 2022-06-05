@@ -1,6 +1,6 @@
 const Tattoo = require("../../../db/models/Tattoo");
 const { mockTattoos, mockTattoosEmpty } = require("../../mocks/mocks");
-const { getTattoos } = require("./tattoosControllers");
+const { getTattoos, deleteTattoo } = require("./tattoosControllers");
 
 const res = {
   status: jest.fn().mockReturnThis(),
@@ -26,6 +26,53 @@ describe("Given the getTattoos controller", () => {
       const next = jest.fn();
 
       await getTattoos(null, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given the deleteTattoo controller", () => {
+  describe("When invoked with a request containing a tattoo", () => {
+    test("Then a response with status 202 and message 'Tattoo has been deleted'", async () => {
+      Tattoo.findByIdAndDelete = jest.fn().mockResolvedValue(true);
+      const expectedStatus = 202;
+      const expectedJson = { message: "Tattoo has been deleted" };
+      const req = {
+        params: {
+          id: mockTattoos[0].id,
+        },
+      };
+
+      await deleteTattoo(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalledWith(expectedJson);
+    });
+  });
+
+  describe("When invoked with a request containing a wrong id", () => {
+    test("Then next should be called", async () => {
+      Tattoo.findByIdAndDelete = jest.fn().mockResolvedValue(false);
+      const next = jest.fn();
+      const req = {
+        params: {
+          id: mockTattoos[0].id,
+        },
+      };
+
+      await deleteTattoo(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe("When invoked with an empty request", () => {
+    test("Then next should be called", async () => {
+      Tattoo.findByIdAndDelete = jest.fn().mockResolvedValue(false);
+      const next = jest.fn();
+
+      await deleteTattoo(null, res, next);
 
       expect(next).toHaveBeenCalled();
     });
