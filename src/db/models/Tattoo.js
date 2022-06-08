@@ -12,6 +12,7 @@ const TattooSchema = new Schema({
   creator: {
     type: SchemaTypes.ObjectId,
     ref: "User",
+    required: true,
   },
   creationDate: {
     type: String,
