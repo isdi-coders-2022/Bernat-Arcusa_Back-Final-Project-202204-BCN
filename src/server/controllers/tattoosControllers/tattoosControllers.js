@@ -37,4 +37,21 @@ const deleteTattoo = async (req, res, next) => {
   }
 };
 
-module.exports = { getTattoos, deleteTattoo };
+const createTattoo = async (req, res, next) => {
+  try {
+    const { title, image, creator, creationDate, tags } = req.body;
+
+    const newTattoo = { title, image, creator, creationDate, tags };
+
+    await Tattoo.create(newTattoo);
+    res.status(200).json({ newTattoo });
+  } catch {
+    const error = new Error("Tattoo couldn't be created");
+    error.statusCode = 400;
+    error.customMessage = "Tattoo couldn't be created";
+
+    next(error);
+  }
+};
+
+module.exports = { getTattoos, deleteTattoo, createTattoo };
