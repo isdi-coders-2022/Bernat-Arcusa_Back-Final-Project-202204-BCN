@@ -14,9 +14,10 @@ const auth = (req, res, next) => {
     debug("User authenticated correctly");
     next();
   } catch {
-    const customError = new Error("Invalid authentication");
-    customError.statusCode = 401;
-    next(customError);
+    const error = new Error("Invalid authentication");
+    error.statusCode = 401;
+    error.customMessage = "Invalid authentication";
+    next(error);
   }
 };
 
