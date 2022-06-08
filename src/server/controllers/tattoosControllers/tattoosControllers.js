@@ -1,3 +1,7 @@
+const debug = require("debug")("tootattoo:server:tattoocontrollers");
+const chalk = require("chalk");
+const fs = require("fs");
+const path = require("path");
 const Tattoo = require("../../../db/models/Tattoo");
 
 const getTattoos = async (req, res, next) => {
@@ -39,12 +43,27 @@ const deleteTattoo = async (req, res, next) => {
 
 const createTattoo = async (req, res, next) => {
   try {
-    const { title, image, creator, creationDate, tags } = req.body;
+    const newTattoo = req.body;
+    const { file } = req;
 
-    const newTattoo = { title, image, creator, creationDate, tags };
+    if (file) {
+      const newImageName = file ? `${Date.now()}${file.originalname}` : "";
 
-    await Tattoo.create(newTattoo);
-    res.status(200).json({ newTattoo });
+      fs.rename(
+        path.join("uploads", "images", file.filename),
+        path.join("uploads", "images", newImageName),
+        (error) => {
+          if (error) {
+            debug(chalk.red("Error renaming image on tattoo create"));
+            next(error);
+          }
+        }
+      );
+      newTattoo.image = newImageName;
+    }
+
+    const createdTattoo = await Tattoo.create(newTattoo);
+    res.status(200).json({ createdTattoo });
   } catch {
     const error = new Error("Tattoo couldn't be created");
     error.statusCode = 400;
