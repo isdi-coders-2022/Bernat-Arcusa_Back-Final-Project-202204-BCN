@@ -9,7 +9,7 @@ const auth = (req, res, next) => {
       throw new Error();
     }
     const token = authorization.replace("Bearer ", "");
-    const userId = jwt.verify(token, process.env.JWT_SECRET_USER);
+    const userId = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = userId;
     debug("User authenticated correctly");
     next();
