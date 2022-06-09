@@ -86,29 +86,3 @@ describe("Given the deleteTattoo controller", () => {
     });
   });
 });
-
-describe("Given the createTattoo controller", () => {
-  describe("When invoked with a request containing a tattoo in the body", () => {
-    test("Then a response with status 200 and the created tattoo will be returned", async () => {
-      const req = { body: mockTattoo };
-      const expectedStatus = 200;
-      const expectedJson = { newTattoo: mockTattoo };
-
-      Tattoo.create = jest.fn().mockReturnValue(true);
-      await createTattoo(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(expectedStatus);
-      expect(res.json).toHaveBeenCalledWith(expectedJson);
-    });
-  });
-
-  describe("When invoked with an empty request", () => {
-    test("Then next should be called", async () => {
-      const next = jest.fn();
-
-      await createTattoo(null, res, next);
-
-      expect(next).toHaveBeenCalled();
-    });
-  });
-});
