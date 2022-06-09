@@ -1,14 +1,6 @@
 const Tattoo = require("../../../db/models/Tattoo");
-const {
-  mockTattoos,
-  mockTattoosEmpty,
-  mockTattoo,
-} = require("../../mocks/mocks");
-const {
-  getTattoos,
-  deleteTattoo,
-  createTattoo,
-} = require("./tattoosControllers");
+const { mockTattoos, mockTattoosEmpty } = require("../../mocks/mocks");
+const { getTattoos, deleteTattoo } = require("./tattoosControllers");
 
 const res = {
   status: jest.fn().mockReturnThis(),
@@ -81,32 +73,6 @@ describe("Given the deleteTattoo controller", () => {
       const next = jest.fn();
 
       await deleteTattoo(null, res, next);
-
-      expect(next).toHaveBeenCalled();
-    });
-  });
-});
-
-describe("Given the createTattoo controller", () => {
-  describe("When invoked with a request containing a tattoo in the body", () => {
-    test("Then a response with status 200 and the created tattoo will be returned", async () => {
-      const req = { body: mockTattoo };
-      const expectedStatus = 200;
-      const expectedJson = { newTattoo: mockTattoo };
-
-      Tattoo.create = jest.fn().mockReturnValue(true);
-      await createTattoo(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(expectedStatus);
-      expect(res.json).toHaveBeenCalledWith(expectedJson);
-    });
-  });
-
-  describe("When invoked with an empty request", () => {
-    test("Then next should be called", async () => {
-      const next = jest.fn();
-
-      await createTattoo(null, res, next);
 
       expect(next).toHaveBeenCalled();
     });
