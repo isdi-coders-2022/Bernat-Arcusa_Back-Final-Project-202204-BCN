@@ -10,11 +10,11 @@ const app = express();
 
 app.use(cors());
 app.use(morgan("dev"));
+app.use("/uploads/images", express.static("images"));
 app.use(express.json());
 app.use(helmet());
 
 app.use("/users", usersRouter);
-
 app.use("/tattoos", tattoosRouter);
 
 app.use(notFoundError);
