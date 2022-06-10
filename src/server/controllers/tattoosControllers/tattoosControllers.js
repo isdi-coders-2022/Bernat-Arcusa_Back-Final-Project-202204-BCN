@@ -2,6 +2,7 @@ const debug = require("debug")("tootattoo:server:tattoocontrollers");
 const chalk = require("chalk");
 const fs = require("fs");
 const path = require("path");
+const jwt = require("jsonwebtoken");
 const Tattoo = require("../../../db/models/Tattoo");
 
 const getTattoos = async (req, res, next) => {
@@ -15,6 +16,22 @@ const getTattoos = async (req, res, next) => {
     next(error);
   } else {
     res.status(200).json({ tattoos });
+  }
+};
+
+const getTattoosByUser = async (req, res, next) => {
+  const { authorization } = req.headers;
+  const token = authorization.replace("Bearer ", "");
+  const { username } = jwt.verify(token, process.env.JWT_SECRET);
+
+  const tattosByUser = await Tattoo.find({ creator: username });
+  if (tattosByUser.length !== 0) {
+    res.status(200).json({ tattosByUser });
+  } else {
+    const userError = new Error();
+    userError.customMessage = "No messages in the DB";
+    userError.statusCode = 400;
+    next(userError);
   }
 };
 
@@ -104,4 +121,10 @@ const editTattoo = async (req, res, next) => {
   }
 };
 
-module.exports = { getTattoos, deleteTattoo, createTattoo, editTattoo };
+module.exports = {
+  getTattoos,
+  getTattoosByUser,
+  deleteTattoo,
+  createTattoo,
+  editTattoo,
+};

@@ -7,6 +7,7 @@ const {
   deleteTattoo,
   createTattoo,
   editTattoo,
+  getTattoosByUser,
 } = require("../../controllers/tattoosControllers/tattoosControllers");
 const { auth } = require("../../middlewares/auth/auth");
 
@@ -18,6 +19,7 @@ const upload = multer({
 const tattoosRouter = express.Router();
 
 tattoosRouter.get("/list", getTattoos);
+tattoosRouter.get("/list/user", auth, getTattoosByUser);
 tattoosRouter.delete("/:id", auth, deleteTattoo);
 tattoosRouter.post("/newTattoo", auth, upload.single("image"), createTattoo);
 tattoosRouter.put("/:id", auth, upload.single("image"), editTattoo);
