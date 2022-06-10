@@ -45,7 +45,6 @@ const createTattoo = async (req, res, next) => {
   try {
     const newTattoo = req.body;
     const { file } = req;
-
     if (file) {
       const newImageName = file ? `${Date.now()}${file.originalname}` : "";
 
