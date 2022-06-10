@@ -4,6 +4,7 @@ const {
   getTattoos,
   deleteTattoo,
   editTattoo,
+  createTattoo,
 } = require("./tattoosControllers");
 
 const res = {
@@ -83,6 +84,38 @@ describe("Given the deleteTattoo controller", () => {
   });
 });
 
+describe("Given a createTattoo function", () => {
+  describe("When its invoked with a right beer", () => {
+    test("Then it should call response method statuscode 201 and a json with the created tattoo ", async () => {
+      const expectedResponse = mockTattoos[0];
+      const expectStatus = 201;
+      Tattoo.create = jest.fn().mockResolvedValue(mockTattoos[0]);
+      const req = {
+        body: mockTattoos[0],
+        image: "mockImage.jpg",
+      };
+
+      await createTattoo(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectStatus);
+      expect(res.json).toHaveBeenCalledWith({
+        createdTattoo: expectedResponse,
+      });
+    });
+  });
+
+  describe("When its invoked and something fails", () => {
+    test("Then it should call next function", async () => {
+      Tattoo.create = jest.fn().mockRejectedValue();
+      const next = jest.fn();
+
+      await createTattoo(null, null, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
 describe("Given a editTattoo function", () => {
   describe("When it's invoked with a file", () => {
     test("Then it should call res methods statuscode 201 and json with the updated tattoo", async () => {
@@ -144,7 +177,7 @@ describe("Given a editTattoo function", () => {
     });
   });
 
-  describe("When it's invoked and somethink fail", () => {
+  describe("When it's invoked and something fails", () => {
     test("Then it should call next function", async () => {
       Tattoo.findById = jest.fn().mockResolvedValue(mockTattoos[0]);
       Tattoo.findByIdAndUpdate = jest.fn().mockRejectedValue();
@@ -155,7 +188,7 @@ describe("Given a editTattoo function", () => {
 
       const next = jest.fn();
 
-      await editTattoo(req, res, next);
+      await editTattoo(req, null, next);
 
       expect(next).toHaveBeenCalled();
     });
