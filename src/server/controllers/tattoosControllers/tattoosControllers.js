@@ -62,7 +62,7 @@ const createTattoo = async (req, res, next) => {
     }
 
     const createdTattoo = await Tattoo.create(newTattoo);
-    res.status(200).json({ createdTattoo });
+    res.status(201).json({ createdTattoo });
   } catch {
     const error = new Error("Tattoo couldn't be created");
     error.statusCode = 400;
