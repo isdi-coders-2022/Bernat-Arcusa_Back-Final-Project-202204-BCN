@@ -72,4 +72,39 @@ const createTattoo = async (req, res, next) => {
   }
 };
 
-module.exports = { getTattoos, deleteTattoo, createTattoo };
+const editTattoo = async (req, res, next) => {
+  const tattoo = req.body;
+  const { id } = req.params;
+  const { file } = req;
+  const currentTattoo = await Tattoo.findById(id);
+  const newImage = req.image;
+  try {
+    if (!file) {
+      const updateTattoo = {
+        ...tattoo,
+        image: currentTattoo.image,
+        imageBackup: currentTattoo.imageBackup,
+      };
+      await Tattoo.findByIdAndUpdate(id, updateTattoo);
+
+      res.status(201).json({
+        message: "Tattoo updated",
+      });
+    } else {
+      const updateTattoo = {
+        ...tattoo,
+        image: newImage,
+      };
+      const updatedTattoo = await Tattoo.findByIdAndUpdate(id, updateTattoo);
+
+      res.status(201).json({ updatedTattoo });
+    }
+  } catch {
+    const error = new Error("Tattoo couldn't be updated");
+    error.statusCode = 400;
+    error.customMessage = "Tattoo couldn't be updated";
+    next(error);
+  }
+};
+
+module.exports = { getTattoos, deleteTattoo, createTattoo, editTattoo };
