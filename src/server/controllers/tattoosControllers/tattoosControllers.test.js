@@ -1,9 +1,5 @@
 const Tattoo = require("../../../db/models/Tattoo");
-const {
-  mockTattoos,
-  mockTattoosEmpty,
-  mockTattoo,
-} = require("../../mocks/mocks");
+const { mockTattoos, mockTattoosEmpty } = require("../../mocks/mocks");
 const {
   getTattoos,
   deleteTattoo,
