@@ -53,7 +53,7 @@ const firebaseUpload = async (req, res, next) => {
               const firebaseImageURL = await getDownloadURL(storageRef);
 
               req.imageBackup = firebaseImageURL;
-              req.image = path.join("images", newImage);
+              req.image = path.join(newImage);
 
               next();
             }
