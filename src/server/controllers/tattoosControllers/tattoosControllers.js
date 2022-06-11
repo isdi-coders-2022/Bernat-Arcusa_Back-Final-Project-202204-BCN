@@ -20,18 +20,25 @@ const getTattoos = async (req, res, next) => {
 };
 
 const getTattoosByUser = async (req, res, next) => {
-  const { authorization } = req.headers;
-  const token = authorization.replace("Bearer ", "");
-  const { username } = jwt.verify(token, process.env.JWT_SECRET);
+  try {
+    const { authorization } = req.headers;
+    const token = authorization.replace("Bearer ", "");
+    const { username } = jwt.verify(token, process.env.JWT_SECRET);
 
-  const tattosByUser = await Tattoo.find({ creator: username });
-  if (tattosByUser.length !== 0) {
-    res.status(200).json({ tattosByUser });
-  } else {
-    const userError = new Error();
-    userError.customMessage = "No messages in the DB";
-    userError.statusCode = 400;
-    next(userError);
+    const tattoosByUser = await Tattoo.find({ creator: username });
+    if (tattoosByUser.length !== 0) {
+      res.status(200).json({ tattoosByUser });
+    } else {
+      const error = new Error();
+      error.customMessage = "No tattoos in the DB";
+      error.statusCode = 400;
+      next(error);
+    }
+  } catch {
+    const error = new Error();
+    error.customMessage = "Request cannot be processed";
+    error.statusCode = 400;
+    next(error);
   }
 };
 
