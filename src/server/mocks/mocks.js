@@ -21,7 +21,7 @@ const mockTattoos = [
     id: "2a2b2c",
     title: "Colored realistic flowers",
     image: "https://pbs.twimg.com/media/FTW9Z45aAAAz67v?format=jpg",
-    creator: "natbernat",
+    creator: "mario",
     creationDate: "2022-06-02",
     tags: ["medium", "traditional", "color", "photo"],
   },

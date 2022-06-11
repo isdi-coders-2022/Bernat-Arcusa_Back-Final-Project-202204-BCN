@@ -5,7 +5,14 @@ const {
   deleteTattoo,
   editTattoo,
   createTattoo,
+  getTattoosByUser,
 } = require("./tattoosControllers");
+
+const mockId = { username: "natbernat", id: "a1b2c3d4" };
+jest.mock("jsonwebtoken", () => ({
+  ...jest.requireActual("jsonwebtoken"),
+  verify: () => mockId,
+}));
 
 const res = {
   status: jest.fn().mockReturnThis(),
@@ -31,6 +38,67 @@ describe("Given the getTattoos controller", () => {
       const next = jest.fn();
 
       await getTattoos(null, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given the getTattoosByUser controller", () => {
+  describe("When invoked with a request containing a token", () => {
+    test("Then a response with status 200 and the list of tattoos filtered by user will be returned", async () => {
+      Tattoo.find = jest.fn().mockResolvedValue(mockTattoos[0]);
+      const expectedStatus = 200;
+      const expectedJson = { tattoosByUser: mockTattoos[0] };
+      const req = {
+        headers: {
+          authorization: "Bearer asdfghjk",
+        },
+      };
+
+      await getTattoosByUser(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalledWith(expectedJson);
+    });
+  });
+
+  describe("When invoked with a request containing a token but there's no tattoos created by this user", () => {
+    test("Then the next method should be called", async () => {
+      Tattoo.find = jest.fn().mockResolvedValue(mockTattoosEmpty);
+      const req = {
+        headers: {
+          authorization: "Bearer asdfghjk",
+        },
+      };
+      const next = jest.fn();
+
+      await getTattoosByUser(req, null, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe("When invoked with a request containing a wrong token but there's no tattoos created by this user", () => {
+    test("Then the next method should be called", async () => {
+      const req = {
+        headers: {
+          authorization: "vearer asdfghjk",
+        },
+      };
+      const next = jest.fn();
+
+      await getTattoosByUser(req, null, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe("When invoked with a request without authorization", () => {
+    test("Then the next method should be called", async () => {
+      const next = jest.fn();
+
+      await getTattoosByUser(null, null, next);
 
       expect(next).toHaveBeenCalled();
     });
