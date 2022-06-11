@@ -9,6 +9,7 @@ const TattooSchema = new Schema({
     type: String,
     required: true,
   },
+  imageBackup: String,
   creator: {
     type: SchemaTypes.String,
     ref: "User",

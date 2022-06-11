@@ -1,7 +1,3 @@
-const debug = require("debug")("tootattoo:server:tattoocontrollers");
-const chalk = require("chalk");
-const fs = require("fs");
-const path = require("path");
 const jwt = require("jsonwebtoken");
 const Tattoo = require("../../../db/models/Tattoo");
 
@@ -68,21 +64,11 @@ const deleteTattoo = async (req, res, next) => {
 const createTattoo = async (req, res, next) => {
   try {
     const newTattoo = req.body;
-    const { file } = req;
-    if (file) {
-      const newImageName = file ? `${Date.now()}${file.originalname}` : "";
-
-      fs.rename(
-        path.join("uploads", "images", file.filename),
-        path.join("uploads", "images", newImageName),
-        (error) => {
-          if (error) {
-            debug(chalk.red("Error renaming image on tattoo create"));
-            next(error);
-          }
-        }
-      );
-      newTattoo.image = newImageName;
+    const { image } = req;
+    if (image) {
+      const newImageBackup = req.imageBackup;
+      newTattoo.image = image;
+      newTattoo.imageBackup = newImageBackup;
     }
 
     const createdTattoo = await Tattoo.create(newTattoo);
@@ -116,7 +102,9 @@ const editTattoo = async (req, res, next) => {
         ...tattoo,
         image: newImage,
       };
-      const updatedTattoo = await Tattoo.findByIdAndUpdate(id, updateTattoo);
+      const updatedTattoo = await Tattoo.findByIdAndUpdate(id, updateTattoo, {
+        new: true,
+      });
 
       res.status(201).json({ updatedTattoo });
     }

@@ -2,6 +2,9 @@ const mockTattoo = {
   title: "Arm abstract fluid forms",
   image:
     "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
+
+  imageBackup:
+    "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
   creator: "natbernat",
   creationDate: "2022-06-02",
   tags: ["small", "blackwork", "b/n", "photo"],
@@ -12,6 +15,8 @@ const mockTattoos = [
     id: "1a1b1c",
     title: "Arm abstract fluid forms",
     image:
+      "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
+    imageBackup:
       "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
     creator: "natbernat",
     creationDate: "2022-06-02",

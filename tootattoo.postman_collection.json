@@ -74,6 +74,172 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "tattoos/list/user",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"mariogl\",\r\n    \"password\":\"1234\",\r\n    \"fullname\":\"Mario González\",\r\n    \"email\":\"mariogl@isdi.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}tattoos/list",
+          "host": ["{{origin}}tattoos"],
+          "path": ["list"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "tattoos/:id",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}/tattoos/629cb2e005e1e418286bf82f",
+          "host": ["{{origin}}"],
+          "path": ["tattoos", "629cb2e005e1e418286bf82f"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "tattoos/newTattoo",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hdGJlcm5hdCIsImlhdCI6MTY1NDg2MTQzMX0.LA92Q_wEA6mkhapmyTh_2HFKiNGjSINMqNaG6gpmoz0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/berna/Desktop/llistat tattoos/E3WmND7XEAMNJhf.jpg"
+            },
+            {
+              "key": "title",
+              "value": "Colorful Cubone in a Blastoise skin",
+              "type": "text"
+            },
+            {
+              "key": "creator",
+              "value": "natbernat",
+              "type": "text"
+            },
+            {
+              "key": "creationDate",
+              "value": "2022-6-10",
+              "type": "text"
+            },
+            {
+              "key": "tags",
+              "value": "[ \"small\", \"new school\", \"color\", \"photo\" ]",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{origin}}tattoos/newTattoo",
+          "host": ["{{origin}}tattoos"],
+          "path": ["newTattoo"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "tattoos/:id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hdGJlcm5hdCIsImlhdCI6MTY1NDg2MTQzMX0.LA92Q_wEA6mkhapmyTh_2HFKiNGjSINMqNaG6gpmoz0",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/berna/Desktop/llistat tattoos/E3WmND7XEAMNJhf.jpg"
+            },
+            {
+              "key": "title",
+              "value": "put test",
+              "type": "text"
+            },
+            {
+              "key": "creator",
+              "value": "natbernat",
+              "type": "text"
+            },
+            {
+              "key": "creationDate",
+              "value": "2022-6-10",
+              "type": "text"
+            },
+            {
+              "key": "tags",
+              "value": "[ \"small\", \"new school\", \"color\", \"photo\" ]",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{origin}}tattoos/:id",
+          "host": ["{{origin}}tattoos"],
+          "path": [":id"],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "62a35c44b290d52fbf0013e1"
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
