@@ -65,12 +65,10 @@ const createTattoo = async (req, res, next) => {
   try {
     const newTattoo = req.body;
     const { image } = req;
-    if (image) {
-      const newImageBackup = req.imageBackup;
-      newTattoo.image = image;
-      newTattoo.imageBackup = newImageBackup;
-    }
 
+    const newImageBackup = req.imageBackup;
+    newTattoo.image = image;
+    newTattoo.imageBackup = newImageBackup;
     const createdTattoo = await Tattoo.create(newTattoo);
     res.status(201).json({ createdTattoo });
   } catch {
