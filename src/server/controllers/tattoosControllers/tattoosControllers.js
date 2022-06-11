@@ -102,7 +102,9 @@ const editTattoo = async (req, res, next) => {
         ...tattoo,
         image: newImage,
       };
-      const updatedTattoo = await Tattoo.findByIdAndUpdate(id, updateTattoo);
+      const updatedTattoo = await Tattoo.findByIdAndUpdate(id, updateTattoo, {
+        new: true,
+      });
 
       res.status(201).json({ updatedTattoo });
     }
