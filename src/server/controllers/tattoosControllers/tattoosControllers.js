@@ -38,6 +38,29 @@ const getTattoosByUser = async (req, res, next) => {
   }
 };
 
+const getTattooById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const tattooById = await Tattoo.findById(id);
+
+    if (tattooById) {
+      res.status(200).json({ message: "Tattoo found" });
+    } else {
+      const error = new Error("Any tattoo with this id has found");
+      error.statusCode = 404;
+      error.customMessage = "Any tattoo with this id has found";
+
+      next(error);
+    }
+  } catch {
+    const error = new Error("Something went wrong");
+    error.statusCode = 404;
+    error.customMessage = "Something went wrong";
+
+    next(error);
+  }
+};
+
 const deleteTattoo = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -117,6 +140,7 @@ const editTattoo = async (req, res, next) => {
 module.exports = {
   getTattoos,
   getTattoosByUser,
+  getTattooById,
   deleteTattoo,
   createTattoo,
   editTattoo,
