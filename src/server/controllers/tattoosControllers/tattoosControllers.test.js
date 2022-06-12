@@ -6,6 +6,7 @@ const {
 
   createTattoo,
   getTattoosByUser,
+  getTattooById,
 } = require("./tattoosControllers");
 
 const mockId = { username: "natbernat", id: "a1b2c3d4" };
@@ -99,6 +100,53 @@ describe("Given the getTattoosByUser controller", () => {
       const next = jest.fn();
 
       await getTattoosByUser(null, null, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given the getTattooById controller", () => {
+  describe("When invoked with a request containing a tattoo", () => {
+    test("Then a response with status 200 and message 'Tattoo found'", async () => {
+      Tattoo.findById = jest.fn().mockResolvedValue(true);
+      const expectedStatus = 200;
+      const expectedJson = { message: "Tattoo found" };
+      const req = {
+        params: {
+          id: mockTattoos[0].id,
+        },
+      };
+
+      await getTattooById(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalledWith(expectedJson);
+    });
+  });
+
+  describe("When invoked with a request containing a wrong id", () => {
+    test("Then next should be called", async () => {
+      Tattoo.findById = jest.fn().mockResolvedValue(false);
+      const next = jest.fn();
+      const req = {
+        params: {
+          id: mockTattoos[0].id,
+        },
+      };
+
+      await getTattooById(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe("When invoked with an empty request", () => {
+    test("Then next should be called", async () => {
+      Tattoo.findById = jest.fn().mockResolvedValue(false);
+      const next = jest.fn();
+
+      await getTattooById(null, res, next);
 
       expect(next).toHaveBeenCalled();
     });

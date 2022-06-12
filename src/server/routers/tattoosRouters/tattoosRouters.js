@@ -8,6 +8,7 @@ const {
   createTattoo,
   editTattoo,
   getTattoosByUser,
+  getTattooById,
 } = require("../../controllers/tattoosControllers/tattoosControllers");
 const { auth } = require("../../middlewares/auth/auth");
 const firebaseUpload = require("../../middlewares/firebaseUpload/firebaseUpload");
@@ -21,6 +22,7 @@ const tattoosRouter = express.Router();
 
 tattoosRouter.get("/list", getTattoos);
 tattoosRouter.get("/list/user", auth, getTattoosByUser);
+tattoosRouter.get("/:id", getTattooById);
 tattoosRouter.delete("/:id", auth, deleteTattoo);
 tattoosRouter.post(
   "/newTattoo",
