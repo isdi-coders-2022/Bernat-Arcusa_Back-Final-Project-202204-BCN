@@ -44,7 +44,7 @@ const getTattooById = async (req, res, next) => {
     const tattooById = await Tattoo.findById(id);
 
     if (tattooById) {
-      res.status(200).json({ message: "Tattoo found" });
+      res.status(200).json({ tattooById });
     } else {
       const error = new Error("Any tattoo with this id has found");
       error.statusCode = 404;
