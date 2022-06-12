@@ -109,9 +109,9 @@ describe("Given the getTattoosByUser controller", () => {
 describe("Given the getTattooById controller", () => {
   describe("When invoked with a request containing a tattoo", () => {
     test("Then a response with status 200 and message 'Tattoo found'", async () => {
-      Tattoo.findById = jest.fn().mockResolvedValue(true);
+      Tattoo.findById = jest.fn().mockResolvedValue(mockTattoos[0]);
       const expectedStatus = 200;
-      const expectedJson = { message: "Tattoo found" };
+      const expectedJson = { tattooById: mockTattoos[0] };
       const req = {
         params: {
           id: mockTattoos[0].id,
@@ -135,7 +135,7 @@ describe("Given the getTattooById controller", () => {
         },
       };
 
-      await getTattooById(req, res, next);
+      await getTattooById(req, null, next);
 
       expect(next).toHaveBeenCalled();
     });
@@ -146,7 +146,7 @@ describe("Given the getTattooById controller", () => {
       Tattoo.findById = jest.fn().mockResolvedValue(false);
       const next = jest.fn();
 
-      await getTattooById(null, res, next);
+      await getTattooById(null, null, next);
 
       expect(next).toHaveBeenCalled();
     });
