@@ -18,13 +18,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  added: [
-    {
-      type: SchemaTypes.ObjectId,
-      ref: "Tattoo",
-      default: [],
-    },
-  ],
   favourites: [
     {
       type: SchemaTypes.ObjectId,
