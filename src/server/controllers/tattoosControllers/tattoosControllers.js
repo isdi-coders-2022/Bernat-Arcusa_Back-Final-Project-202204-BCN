@@ -87,11 +87,10 @@ const deleteTattoo = async (req, res, next) => {
 const createTattoo = async (req, res, next) => {
   try {
     const newTattoo = req.body;
-    const { image } = req;
+    const { image, imageBackup } = req;
 
-    const newImageBackup = req.imageBackup;
     newTattoo.image = image;
-    newTattoo.imageBackup = newImageBackup;
+    newTattoo.imageBackup = imageBackup;
     const createdTattoo = await Tattoo.create(newTattoo);
     res.status(201).json({ createdTattoo });
   } catch {
@@ -106,14 +105,15 @@ const createTattoo = async (req, res, next) => {
 const editTattoo = async (req, res, next) => {
   const tattoo = req.body;
   const { id } = req.params;
-  const { file } = req;
+  const { file, image, imageBackup } = req;
   const currentTattoo = await Tattoo.findById(id);
-  const newImage = req.image;
+
   try {
     if (!file) {
       const updatedTattoo = {
         ...tattoo,
         image: currentTattoo.image,
+        imageBackup: currentTattoo.imageBackup,
       };
       await Tattoo.findByIdAndUpdate(id, updatedTattoo);
 
@@ -121,7 +121,8 @@ const editTattoo = async (req, res, next) => {
     } else {
       const updateTattoo = {
         ...tattoo,
-        image: newImage,
+        image,
+        imageBackup,
       };
       const updatedTattoo = await Tattoo.findByIdAndUpdate(id, updateTattoo, {
         new: true,

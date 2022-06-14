@@ -12,9 +12,12 @@ describe("Given a editTattoo function", () => {
     test("Then it should call res methods statuscode 201 and json with the updated tattoo", async () => {
       const expectedResponse = {
         id: "1a1b1c",
-        title: "Arm abstract fluid forms",
-        image: "newMockImage.jpg",
-        imageBackup: "newMockImage.jpg",
+        title: "New tattoo title",
+        image:
+          "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
+
+        imageBackup:
+          "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
         creator: "natbernat",
         creationDate: "2022-06-02",
         tags: ["small", "blackwork", "b/n", "photo"],
@@ -24,8 +27,12 @@ describe("Given a editTattoo function", () => {
       Tattoo.findByIdAndUpdate = jest.fn().mockResolvedValue(expectedResponse);
       const req = {
         file: {},
-        image: "newMockImage.jpg",
-        body: mockTattoos[0],
+        image:
+          "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
+
+        imageBackup:
+          "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
+        body: expectedResponse,
         params: { id: "1a1b1c" },
       };
 
@@ -42,8 +49,11 @@ describe("Given a editTattoo function", () => {
     test("Then it should call res methods statuscode 201 and a json with a the updated tattoo", async () => {
       const expectedResponse = {
         id: "1a1b1c",
-        title: "Other name",
+        title: "New tattoo title",
         image:
+          "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
+
+        imageBackup:
           "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
         creator: "natbernat",
         creationDate: "2022-06-02",
@@ -53,6 +63,11 @@ describe("Given a editTattoo function", () => {
       Tattoo.findById = jest.fn().mockResolvedValue(mockTattoos[0]);
       Tattoo.findByIdAndUpdate = jest.fn().mockResolvedValue(expectedResponse);
       const req = {
+        image:
+          "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
+
+        imageBackup:
+          "https://i.pinimg.com/564x/e8/f7/0c/e8f70c51540684a4daf881a0cb73ed42.jpg",
         body: expectedResponse,
         params: { id: "1a1b1c" },
       };

@@ -137,6 +137,16 @@
     {
       "name": "tattoos/:id",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdyb21lbmF1ZXIiLCJpYXQiOjE2NTUxMjg4MDZ9.8Pd4kddVgpZe8NPvRS-sv4P71wqvxu08BVQGfoHOFq8",
+              "type": "string"
+            }
+          ]
+        },
         "method": "DELETE",
         "header": [],
         "body": {
@@ -149,9 +159,15 @@
           }
         },
         "url": {
-          "raw": "{{origin}}/tattoos/629cb2e005e1e418286bf82f",
-          "host": ["{{origin}}"],
-          "path": ["tattoos", "629cb2e005e1e418286bf82f"]
+          "raw": "{{origin}}tattoos/:id",
+          "host": ["{{origin}}tattoos"],
+          "path": [":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "62a6edecd6c36a87806cd000"
+            }
+          ]
         }
       },
       "response": []
